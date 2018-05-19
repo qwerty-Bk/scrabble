@@ -19,3 +19,11 @@ class Player:
         res -= self.empties
         if res < 0: res = 0
         return res
+    
+    def turn(self):
+        raise NotImplementedError("Player::turn not implemented in " + self.__class__.__name__)
+        
+    def turn0(self):
+        raise NotImplementedError("Player::turn0 not implemented in " + self.__class__.__name__)
+ 
+  
