@@ -13,4 +13,7 @@ class Board:
         ]
 
     def place(self, word, cop, ced):
-        for i in range(ced[1] - cop[1])
+        for i in range(len(word)):
+            self.cells[cop[0]][cop[1] + i] = word[i]
+    
+    
