@@ -40,5 +40,8 @@ class Words:
             else if a == 1:
                 match1.append(a)
         return match1, match0
-
+    
+    def x(self):
+        pass
+    
 # TODO: search;
