@@ -2,8 +2,17 @@ from words import encode
 
 class Player:
     # pattern, empties = encode(...)
-    def __init__(self, letters = None):
-        self.pattern, self.empties = encode(letters)
+    def __init__(self, letters):
+        self.letters = letters
+
+    @property
+    def letters(self):
+        return self._letters
+
+    @property(letters.setter)
+    def letters(self, val):
+        self._letters = val
+        self.pattern, self.empties = encode(self._letters)
     
     def match(self, word):
         temp = str(self.pattern)
@@ -22,8 +31,8 @@ class Player:
     
     def turn(self):
         raise NotImplementedError("Player::turn not implemented in " + self.__class__.__name__)
-        
+        return False
+
     def turn0(self):
         raise NotImplementedError("Player::turn0 not implemented in " + self.__class__.__name__)
- 
-  
+        return False
