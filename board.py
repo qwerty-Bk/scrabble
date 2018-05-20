@@ -1,7 +1,8 @@
 # ВСЕ СЛОВА ГОРИЗОНТАЛЬНЫЕ СЛЕВА НАПРАВО
 
+
 class Board:
-    def __init__(self, width=15, height=15):
+    def __init__(self, width = 15, height = 15):
         self.width = width
         self.height = height
         self.wordmod = [
@@ -20,7 +21,7 @@ class Board:
     def place(self, word, row, column):
         for i in range(len(word)):
             self.cells[row][column + i] = word[i]
-    
+
     def cntscr(self, word, row, column):
         pts = 0
         mult = 1

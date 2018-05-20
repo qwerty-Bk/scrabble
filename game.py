@@ -4,8 +4,9 @@ from bag import Bag
 
 # usage: game = Game(CompPlayer(), UserPlayer())
 
+
 class Game:
-    scores = {} # TODO: fill or init
+    scores = {}  # TODO: fill or init
 
     def __init__(self, bag = None, board = None, *players):
         if not players:
@@ -19,7 +20,7 @@ class Game:
         self.board = board
         self._index = 0
         self._fails = 0
-        
+
     def run(self):
         while not self.bag and any(not i.letters for i in self.players):
             self.currentPlayer.turn()
@@ -32,24 +33,25 @@ class Game:
     @property
     def currentPlayer(self):
         return self.players[self._index]
-    
+
     def __normal_turn(self):
-        if self.currentPlayer.turn(): self.fails = 0
-        else: self.fail()
+        if self.currentPlayer.turn():
+            self.fails = 0
+        else:
+            self.fail()
         self.nextPlayer()
 
     def fail(self):
         self._fails += 1
         if self._fails >= len(self.players):
-            counts = [self.bag.add(i.letters)) for i in self.players]
+            counts = [self.bag.add(i.letters) for i in self.players]
             for i, j in zip(self.players, counts):
                 i.letters = self.bag.get(j)
             self._fails = 0
-     
+
     def turn(self):
         if self.currentPlayer.turn0():
             self.turn = self.__normal_turn
             self._fails = 0
         else:
             self.fail()
- 

@@ -1,5 +1,6 @@
 from words import encode
 
+
 class Player:
     # pattern, empties = encode(...)
     def __init__(self, letters):
@@ -13,7 +14,7 @@ class Player:
     def letters(self, val):
         self._letters = val
         self.pattern, self.empties = encode(self._letters)
-    
+
     def match(self, word):
         temp = str(self.pattern)
         res = 0
@@ -26,13 +27,22 @@ class Player:
             temp //= 10
             word //= 10
         res -= self.empties
-        if res < 0: res = 0
+        if res < 0:
+            res = 0
         return res
-    
+
     def turn(self):
-        raise NotImplementedError("Player::turn not implemented in " + self.__class__.__name__)
+        raise NotImplementedError(
+            "Player::turn not implemented in {0}".format(
+                self.__class__.__name__
+            )
+        )
         return False
 
     def turn0(self):
-        raise NotImplementedError("Player::turn0 not implemented in " + self.__class__.__name__)
+        raise NotImplementedError(
+            "Player::turn0 not implemented in {0}".format(
+                self.__class__.__name__
+            )
+        )
         return False
