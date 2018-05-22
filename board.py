@@ -22,6 +22,15 @@ class Board:
         for i in range(len(word)):
             self.cells[row][column + i] = word[i]
 
+    def findBestInCenter(self, word):
+        return max(
+            x for x in range(
+                max(0, self.centerHorizontal - len(word)),
+                min(self.centerHorizontal, self.width - len(word) - 1) + 1
+            ),
+            key = lambda x: cntscr(word, self.centerVertical, x)
+        )
+
     def cntscr(self, word, row, column):
         pts = 0
         mult = 1
