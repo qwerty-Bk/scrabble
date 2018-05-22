@@ -35,6 +35,9 @@ class Game:
         return self.players[self._index]
 
     def __normal_turn(self):
+        self.currentPlayer.letters += self.bag.get(
+            7 - len(self.currentPlayer.letters)
+        )
         if self.currentPlayer.turn():
             self.fails = 0
         else:
@@ -50,6 +53,9 @@ class Game:
             self._fails = 0
 
     def turn(self):
+        self.currentPlayer.letters += self.bag.get(
+            7 - len(self.currentPlayer.letters)
+        )
         if self.currentPlayer.turn0():
             self.turn = self.__normal_turn
             self._fails = 0
