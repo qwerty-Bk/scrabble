@@ -1,4 +1,5 @@
 from words import encode
+from utils import *
 
 
 class Player:
@@ -31,18 +32,10 @@ class Player:
             res = 0
         return res
 
+    @virtual
     def turn(self):
-        raise NotImplementedError(
-            "Player::turn not implemented in {0}".format(
-                self.__class__.__name__
-            )
-        )
         return False
 
+    @virtual
     def turn0(self):
-        raise NotImplementedError(
-            "Player::turn0 not implemented in {0}".format(
-                self.__class__.__name__
-            )
-        )
         return False
