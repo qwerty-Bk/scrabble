@@ -1,11 +1,11 @@
-from words import encode
+from words import encode, lettersAreNormal
 from utils import *
 
 
 class Player:
-    # pattern, empties = encode(...)
-    def __init__(self, letters):
-        self.letters = letters
+    @property
+    def lettersAreNormal(self):
+        return lettersAreNormal(self.letters)
 
     @property
     def letters(self):
