@@ -1,4 +1,4 @@
-from player import CompPlayer, UserPlayer
+from player import State
 from board import Board
 from bag import Bag
 
@@ -34,13 +34,41 @@ class Game:
     def currentPlayer(self):
         return self.players[self._index]
 
-    def __normal_turn(self):
+    def removeLetters(self, letters):
+       self.bag.add(
+            self.currentPlayer
+                .removeLetters(letters)
+        )
+        
+    def swapLetters(self):
+        self.currentPlayer.letters = self.bag.get(self.bag.add(self.letters))
+    
+    def _normal_turn(self):
+        self.currentPlayer.turn()
+
+    def _turn(self)
+        self.currentPlayer.turn0()
+    
+    def swapTurn(self):
+        self._turn = self._normal_turn
+        self.swapTurn = lambda x: pass
+
+    def turn(self):
         self.currentPlayer.letters += self.bag.get(
             7 - len(self.currentPlayer.letters)
         )
-        if self.currentPlayer.turn():
+        state = self._turn()
+        if state > 0:
+            letter, count = State.Decode(state)
+            self.removeLetters(letter * count)
+            return True
+        elif state == State.LettersChange:
+            self.swapLetters()
+            self.fail()
+        elif state == State.SuccessfulTurn:
             self.fails = 0
-        else:
+            self.swapTurn()
+        else: # State = Pass Turn
             self.fail()
         self.nextPlayer()
 
@@ -51,13 +79,3 @@ class Game:
             for i, j in zip(self.players, counts):
                 i.letters = self.bag.get(j)
             self._fails = 0
-
-    def turn(self):
-        self.currentPlayer.letters += self.bag.get(
-            7 - len(self.currentPlayer.letters)
-        )
-        if self.currentPlayer.turn0():
-            self.turn = self.__normal_turn
-            self._fails = 0
-        else:
-            self.fail()

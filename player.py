@@ -2,6 +2,20 @@ from words import encode, lettersAreNormal, Words
 from utils import *
 
 
+class State:
+    @staticmethod
+    def ChangeLetters(letter, count):
+        return (ord(letter) - ord('а')) * 10 + count
+    
+    @staticmethod
+    def Decode(num):
+        return num // 10, num % 10
+    
+    SuccessfulTurn = 0
+    PassTurn = -1
+    LettersChange = -2
+
+
 class Player:
     def __init__(self, words, board, bag):
         self.words = words
@@ -9,7 +23,7 @@ class Player:
         self.bag = bag
 
     def swapLetters(self):
-        self.letters = selg.bag.get(self.bag.add(self.letters))
+        self.letters = self.bag.get(self.bag.add(self.letters))
 
     @property
     def lettersAreNormal(self):
@@ -25,6 +39,7 @@ class Player:
                 self.letters.remove(i)
             except ValueError:
                 self.letters.remove(Words.EMPTY)
+        return word
 
     @property(letters.setter)
     def letters(self, val):
@@ -49,8 +64,8 @@ class Player:
 
     @virtual
     def turn(self):
-        return False
+        return State.PassTurn
 
     @virtual
     def turn0(self):
-        return False
+        return State.PassTurn
