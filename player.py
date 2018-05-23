@@ -22,9 +22,6 @@ class Player:
         self.board = board
         self.bag = bag
 
-    def swapLetters(self):
-        self.letters = self.bag.get(self.bag.add(self.letters))
-
     @property
     def lettersAreNormal(self):
         return lettersAreNormal(self.letters)
