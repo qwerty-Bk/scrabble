@@ -17,12 +17,10 @@ class State:
 
 
 class Player:
-    def __init__(self, words, board, bag):
+    def __init__(self, words, board):
         self.words = words
         self.board = board
-        self.bag = bag
 
-    @property
     def lettersAreNormal(self):
         return lettersAreNormal(self.letters)
 

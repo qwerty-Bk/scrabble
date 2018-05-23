@@ -66,7 +66,7 @@ class Game:
             self.swapLetters()
             self.fail()
         elif state == State.SuccessfulTurn:
-            self.fails = 0
+            self._fails = 0
             self.swapTurn()
         else: # State = Pass Turn
             self.fail()

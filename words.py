@@ -23,9 +23,11 @@ def lettersAreNormal(letters):
     for i, j in cntr.items():
         if i in vowels:
             vow += j
-        if j > 2 or vow > 5:
-            return False
-    return vow >= 2
+        if j > 2:
+            return i, j
+        if vow > 5:
+            return '', -vow
+    return '', 0 if vow >= 2 else '', -vow
 
 
 class Words:
