@@ -2,6 +2,8 @@
 
 
 class Board:
+    EMPTY = ' '
+
     def __init__(self, width = 15, height = 15):
         self.width = width
         self.height = height
@@ -14,13 +16,41 @@ class Board:
             for j in range(self.height)
         ]
         self.cells = [
-            ['*' for i in range(self.width)]
+            [self.EMPTY for i in range(self.width)]
             for j in range(self.height)
         ]
 
     def place(self, word, row, column):
         for i in range(len(word)):
             self.cells[row][column + i] = word[i]
+
+    def tryPlace(self, word, row, column):
+        for i in range(len(word)):
+            if self.cells[row][column + i] not
+                in (self.EMPTY, word[i], Words.EMPTY):
+                return False
+        return True
+
+
+    def findPositionGenerator(self, word, missingletters):
+        for let, offsets in missingletters.items():
+            for row in range(self.cells.height):
+                for column in range(self.cells.width):
+                    if self.cells[row][column] == let:
+                        for offset in offsets:
+                            if self.tryPlace(word, row, column - offset):
+                                yield row, column - offset
+
+    def findPosition(self, word, missingletters):
+        try:
+            return max(
+                (i, cntscr(word, i[0], i[1])) for i
+                    in self.findPositionGenerator(word, missingletters),
+                key = lambda x: x[1]
+            )
+        except ValueError:
+            return None, None
+
 
     def findBestInCenter(self, word):
         return max(

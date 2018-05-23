@@ -11,6 +11,8 @@ def encode(word):
             res += 10 ** (ord(l) - ord('а'))
     return res, empties
 
+def positionInWord(letter, word):
+    return (i for i in range(len(word)) if word[i] == letter)
 
 vowels = tuple('уеыаоэяию')
 def lettersAreNormal(letters):
@@ -38,8 +40,7 @@ class Words:
     }
     ADIITIONAL_WEIGHT = 6
 
-    @staticmethod
-    def scores(st):
+    def scores(_, st):
         val = 0
         for i in st:
             val += self.WEIGHTS[i]
@@ -47,16 +48,8 @@ class Words:
             val += self.ADDITIONAL_WEIGHT * (len(st) - 4)
         return val
 
-
-    def findCandidates(self, player):
-        match0 = []
-        match1 = []
-        for i in words:
-            a = player.match(i)
-            if a == 0:
-                match0.append(a)
-            else if a == 1:
-                match1.append(a)
-        return match1, match0
+    def getMatches(self, x):
+        return word for word, pattern in self.words.all
+            if self.match(pattern) == x
 
 # TODO: search
