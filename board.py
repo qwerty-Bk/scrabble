@@ -31,7 +31,6 @@ class Board:
                 return False
         return True
 
-
     def findPositionGenerator(self, word, missingletters):
         for let, offsets in missingletters.items():
             for row in range(self.cells.height):
@@ -51,6 +50,21 @@ class Board:
         except ValueError:
             return None, None
 
+    def BestConnectedWord(self, letters):
+        #todo letters-> woard
+        for i in range(self.height):
+            for j in range(self.width - len(woard)):
+                match = True
+                for n in range(len(woard)):
+                    if board[i][j] not in (words.EMPTY, woard[n], self.EMPTY):
+                        match = False
+                        break
+                if match:
+                    #todo все connectionsy
+                    
+                    yield woard, [i, j], ConWord, posOfC, scoresWC
+                    
+                    
 
     def findBestInCenter(self, word):
         return max(

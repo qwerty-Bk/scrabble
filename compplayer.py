@@ -55,3 +55,5 @@ class CompPlayer(Player):
             word, pos, scores = max(self.wordsGenerator(), key = lambda x: x[2])
         except ValueError:
             pass # TODO
+        try:
+            wordWithCon, posOfWWC, ConWord, posOfC, scoresWC = self.board.BestConnectedWord(letters)
