@@ -61,10 +61,37 @@ class Board:
                         break
                 if match:
                     #todo все connectionsy
-                    
+                    start = self.board[i].rfind(self.EMPTY, j - 1)
+                    end = self.board[i].find(self.EMPTY, j + len(word))
+                    conn, connStart = None, None
+                    if start == -1:
+                        if end != -1:
+                            conn, connStart = max(self.words.connections(
+                                self.board[i][j:end], len(word)
+                            ), ...)
+                    else:
+                        if end == -1:
+                            conn, connStart = max(self.words.connections(
+                                self.board[i][start:j + len(word)], j - start
+                            ), ...)
+                        else:
+                            len1 = j - start
+                            src = self.board[i][start:end]
+                            conn, connStart = max(self.words.connections(
+                                src, len1
+                            ), ...)
+                            conn1, connStart1 = max(self.words.connections(
+                                src, len1 + len(word)
+                            ), ...)
+                            conn, connStart = max([
+                                (conn, connStart),
+                                (conn1, connStart1)
+                            ], ...)
+                    if conn is not None:
+                        pass
                     yield woard, [i, j], ConWord, posOfC, scoresWC
-                    
-                    
+
+
 
     def findBestInCenter(self, word):
         return max(

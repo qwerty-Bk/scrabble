@@ -42,6 +42,27 @@ class Words:
     }
     ADIITIONAL_WEIGHT = 6
 
+    def connections(self, src, div):
+        for length in range(len(src)):
+            for j in range(
+                max(0, div - length),
+                min(len(src) - length, div)):
+                # функция contains проверяет наличие слова в словаре
+                # учитывая пустышки и возвращает все варианты без пустышек
+                for i in self.contains(src[j:j + length]):
+                    yield j, i
+
+    def compare(self, w1, w2):
+        for i, j in zip(w1, w2):
+            if i != j and
+                i != self.EMPTY and
+                j != self.EMPTY:
+                return False
+        return True
+
+    def contains(self, src):
+        return i for i in self.all_words if self.compare(i, src)
+
     def scores(_, st):
         val = 0
         for i in st:
